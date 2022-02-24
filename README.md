@@ -39,3 +39,29 @@ npm run test:unit
 ```sh
 npm run lint
 ```
+
+### Deploy on heroku
+
+1. create `static.json` in root of project
+
+```json
+{
+  "root": "dist",
+  "clean_urls": true,
+  "routes": {
+    "/**": "index.html"
+  }
+}
+```
+
+2. add `static.json` in stage and commit
+
+3. deploy
+
+```bash
+heroku login
+heroku create
+heroku buildpacks:add heroku/nodejs
+heroku buildpacks:add https://github.com/heroku/heroku-buildpack-static
+git push heroku main
+```
