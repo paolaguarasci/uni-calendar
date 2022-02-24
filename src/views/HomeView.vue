@@ -1,9 +1,9 @@
 <script setup>
-import Calendar from "@/components/CalendarComp.vue";
+import FullCalendar from "@/components/FullCalendar.vue";
 </script>
 
 <template>
   <main>
-    <Calendar />
+    <FullCalendar />
   </main>
 </template>
