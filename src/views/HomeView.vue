@@ -1,9 +1,15 @@
-<script setup>
-import FullCalendar from "@/components/FullCalendar.vue";
-</script>
-
 <template>
-  <main>
+  <div>
     <FullCalendar />
-  </main>
+  </div>
 </template>
+
+<script>
+import FullCalendar from "@/components/FullCalendar.vue";
+export default {
+  name: "HomeView",
+  components: {
+    FullCalendar,
+  },
+};
+</script>

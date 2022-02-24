@@ -11,11 +11,76 @@ import iCalendarPlugin from "@fullcalendar/icalendar";
 
 export default {
   components: {
-    FullCalendar, // make the <FullCalendar> tag available
+    FullCalendar,
   },
+
   data() {
+    const vm = this;
+
     return {
       calendarOptions: {
+        customButtons: {
+          all: {
+            text: "all",
+            click: function () {
+              vm.$refs.calendar.options.eventSources = [
+                {
+                  id: 1,
+                  url: "https://apache.prod.up.cineca.it/api/FiltriICal/impegniICal?id=62180476609c0c0021d834a0",
+                  format: "ics",
+                  color: "green",
+                },
+                {
+                  id: 2,
+                  url: "https://apache.prod.up.cineca.it/api/FiltriICal/impegniICal?id=6218058cc0b69e001c96830e",
+                  format: "ics",
+                  color: "red",
+                },
+              ];
+            },
+          },
+          info: {
+            text: "informatica",
+            click: function () {
+              vm.$refs.calendar.options.eventSources = [
+                {
+                  id: 1,
+                  url: "https://apache.prod.up.cineca.it/api/FiltriICal/impegniICal?id=62180476609c0c0021d834a0",
+                  format: "ics",
+                  color: "green",
+                },
+              ];
+            },
+          },
+          sfp: {
+            text: "sfp",
+            click: function () {
+              vm.$refs.calendar.options.eventSources = [
+                {
+                  id: 2,
+                  url: "https://apache.prod.up.cineca.it/api/FiltriICal/impegniICal?id=6218058cc0b69e001c96830e",
+                  format: "ics",
+                  color: "red",
+                },
+              ];
+            },
+          },
+        },
+        dateClick: function (arg) {
+          console.log(arg.date.toUTCString());
+        },
+        eventClick: function (info) {
+          alert("Event: " + info.event.title);
+          info.el.style.borderColor = "green";
+        },
+
+        headerToolbar: {
+          left: "prev,next today",
+          center: "all info sfp",
+          right: "dayGridMonth,timeGridWeek,timeGridDay,listWeek",
+        },
+        titleFormat: { year: "numeric", month: "long", day: "numeric" },
+        nowIndicator: true,
         hiddenDays: [7],
         businessHours: {
           daysOfWeek: [1, 2, 3, 4, 5, 6],
@@ -32,12 +97,16 @@ export default {
         initialView: "timeGridWeek",
         eventSources: [
           {
+            id: 1,
             url: "https://apache.prod.up.cineca.it/api/FiltriICal/impegniICal?id=62180476609c0c0021d834a0",
             format: "ics",
+            color: "green",
           },
           {
+            id: 2,
             url: "https://apache.prod.up.cineca.it/api/FiltriICal/impegniICal?id=6218058cc0b69e001c96830e",
             format: "ics",
+            color: "red",
           },
         ],
       },
@@ -46,5 +115,7 @@ export default {
 };
 </script>
 <template>
-  <FullCalendar :options="calendarOptions" />
+  <div>
+    <FullCalendar :options="calendarOptions" ref="calendar" />
+  </div>
 </template>
