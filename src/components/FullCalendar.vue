@@ -52,6 +52,36 @@ export default {
               ];
             },
           },
+          dataanalitics: {
+            text: "data analitics",
+            click: function () {
+              let calendarApi = vm.$refs.calendar.getApi();
+              let events = calendarApi.getEvents().filter((event) => {
+                return event.title.includes("DATA");
+              });
+              vm.$refs.calendar.options.eventSources = [
+                {
+                  id: 1,
+                  events: events,
+                },
+              ];
+            },
+          },
+          theoretical: {
+            text: "theoretical",
+            click: function () {
+              let calendarApi = vm.$refs.calendar.getApi();
+              let events = calendarApi.getEvents().filter((event) => {
+                return event.title.includes("THEORETICAL");
+              });
+              vm.$refs.calendar.options.eventSources = [
+                {
+                  id: 1,
+                  events: events,
+                },
+              ];
+            },
+          },
           sfp: {
             text: "sfp",
             click: function () {
@@ -76,7 +106,7 @@ export default {
 
         headerToolbar: {
           left: "prev,next today",
-          center: "all info sfp",
+          center: "all info sfp dataanalitics theoretical",
           right: "dayGridMonth,timeGridWeek,timeGridDay,listWeek",
         },
         titleFormat: { year: "numeric", month: "long", day: "numeric" },
